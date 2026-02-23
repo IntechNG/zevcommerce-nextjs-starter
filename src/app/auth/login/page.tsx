@@ -1,76 +1,84 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/contexts/ToastContext';
+import { login } from '@/lib/api/auth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-
-export const metadata = {
-    title: 'Sign In | ZevCommerce',
-    description: 'Log in to your account',
-};
+import { ROUTES } from '@/lib/constants';
 
 export default function LoginPage() {
+    const router = useRouter();
+    const { setAuth } = useAuth();
+    const { addToast } = useToast();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError('');
+        setIsLoading(true);
+        try {
+            const result = await login(email, password);
+            setAuth(result.accessToken, result.customer);
+            addToast('Welcome back!');
+            router.push(ROUTES.ACCOUNT);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Invalid email or password');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <div className="flex min-h-[80vh] flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-                <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-brand">
-                    Welcome back
-                </h2>
-                <p className="mt-2 text-sm text-text-secondary">
-                    Or{' '}
-                    <Link href="/auth/register" className="font-medium text-brand hover:underline">
-                        create a new account
+        <div className="flex-1 flex items-center justify-center px-4 py-12">
+            <div className="w-full max-w-sm">
+                <h1 className="text-2xl font-bold text-text-primary text-center mb-2">Sign In</h1>
+                <p className="text-sm text-text-secondary text-center mb-8">
+                    Welcome back. Enter your credentials to continue.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    {error && (
+                        <div className="p-3 rounded-md bg-red-50 text-sm text-red-700">{error}</div>
+                    )}
+                    <Input
+                        label="Email"
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="you@example.com"
+                        required
+                    />
+                    <Input
+                        label="Password"
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                    />
+                    <div className="text-right">
+                        <Link href={ROUTES.FORGOT_PASSWORD} className="text-xs text-text-secondary hover:text-text-primary transition-colors">
+                            Forgot password?
+                        </Link>
+                    </div>
+                    <Button type="submit" variant="primary" size="lg" className="w-full" isLoading={isLoading}>
+                        Sign In
+                    </Button>
+                </form>
+
+                <p className="mt-6 text-center text-sm text-text-secondary">
+                    Don&apos;t have an account?{' '}
+                    <Link href={ROUTES.REGISTER} className="font-medium text-brand hover:underline">
+                        Create one
                     </Link>
                 </p>
-            </div>
-
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-surface px-4 py-8 shadow-sm ring-1 ring-border-light sm:rounded-lg sm:px-10">
-                    <form className="space-y-6">
-                        <Input
-                            label="Email address"
-                            id="email"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            required
-                        />
-
-                        <Input
-                            label="Password"
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                        />
-
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-border-light text-brand focus:ring-brand"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-text-secondary">
-                                    Remember me
-                                </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <Link href="/auth/forgot-password" className="font-medium text-brand hover:underline">
-                                    Forgot your password?
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div>
-                            <Button type="button" size="lg" className="w-full">
-                                Sign in
-                            </Button>
-                        </div>
-                    </form>
-
-                </div>
             </div>
         </div>
     );

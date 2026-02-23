@@ -1,33 +1,23 @@
-import { zevClient } from '@/lib/zev-client';
-import { CollectionCard } from '@/components/collection/CollectionCard';
+import type { Metadata } from 'next';
+import { getCollections } from '@/lib/api/collections';
+import { CollectionGrid } from '@/components/collection/CollectionGrid';
 
-export const dynamic = 'force-dynamic';
-
-export const metadata = {
-    title: 'Collections | ZevCommerce',
-    description: 'Browse curated product collections.',
+export const metadata: Metadata = {
+    title: 'Collections',
+    description: 'Browse our curated collections.',
 };
 
 export default async function CollectionsPage() {
-    const collections = await zevClient.collections.list();
+    const collections = await getCollections();
 
     return (
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between border-b border-border-light pb-6">
-                <h1 className="text-3xl font-bold tracking-tight text-brand">Collections</h1>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">Collections</h1>
+                <p className="mt-2 text-sm text-text-secondary">Browse our curated edits</p>
             </div>
 
-            {collections.length === 0 ? (
-                <div className="py-20 text-center">
-                    <p className="text-text-secondary">No collections found.</p>
-                </div>
-            ) : (
-                <div className="mt-12 grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 lg:gap-x-8">
-                    {collections.map((collection) => (
-                        <CollectionCard key={collection.id} collection={collection} />
-                    ))}
-                </div>
-            )}
+            <CollectionGrid collections={collections} />
         </div>
     );
 }

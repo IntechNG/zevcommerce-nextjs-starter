@@ -1,22 +1,126 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-100: #e6f0ff;
+  --color-brand-50: #f8fafc;
+  --color-brand-100: #f1f5f9;
   --color-brand: #0f172a;
   --color-surface: #ffffff;
-  --color-surface-hover: #f1f5f9;
+  --color-surface-hover: #f8fafc;
+  --color-surface-muted: #f1f5f9;
   --color-border-light: #e2e8f0;
   --color-text-primary: #0f172a;
   --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-accent: #18181b;
 
   --font-sans: "Inter", "Geist", "Segoe UI", sans-serif;
 }
 
 /* Base resets */
 @layer base {
-
   html,
   body {
     @apply antialiased bg-surface text-text-primary h-full w-full;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better focus styles */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Utility animation classes */
+@layer utilities {
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.3s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+}
+
+/* Prose styles for CMS content */
+.prose {
+  @apply text-text-primary leading-relaxed;
+}
+
+.prose h2 {
+  @apply text-xl font-semibold mt-8 mb-4 text-text-primary;
+}
+
+.prose h3 {
+  @apply text-lg font-semibold mt-6 mb-3 text-text-primary;
+}
+
+.prose p {
+  @apply mb-4 text-text-secondary;
+}
+
+.prose ul {
+  @apply mb-4 pl-6 space-y-2;
+}
+
+.prose li {
+  @apply text-text-secondary list-disc;
+}
+
+.prose strong {
+  @apply font-semibold text-text-primary;
+}
+
+.prose a {
+  @apply text-brand underline underline-offset-2 hover:no-underline;
 }

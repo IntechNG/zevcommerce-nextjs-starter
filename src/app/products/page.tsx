@@ -1,35 +1,37 @@
-import { zevClient } from '@/lib/zev-client';
-import { ProductCard } from '@/components/product/ProductCard';
+import type { Metadata } from 'next';
+import { getProducts } from '@/lib/api/products';
+import { ProductGrid } from '@/components/product/ProductGrid';
+import { Pagination } from '@/components/ui/Pagination';
+import { DEFAULT_PAGE_SIZE } from '@/lib/constants';
 
-export const dynamic = 'force-dynamic';
-
-export const metadata = {
-    title: 'All Products | ZevCommerce',
-    description: 'Shop our latest catalog of premium products.',
+export const metadata: Metadata = {
+    title: 'All Products',
+    description: 'Browse our complete collection of products.',
 };
 
-export default async function ProductsPage() {
-    const productsResult = await zevClient.products.list({ limit: 20 });
-    const products = productsResult.data || [];
+export default async function ProductsPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ page?: string }>;
+}) {
+    const params = await searchParams;
+    const page = Number(params.page) || 1;
+    const { data: products, meta } = await getProducts({ page, limit: DEFAULT_PAGE_SIZE });
 
     return (
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between border-b border-border-light pb-6">
-                <h1 className="text-3xl font-bold tracking-tight text-brand">All Products</h1>
-                <p className="text-sm text-text-secondary">{products.length} items</p>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">All Products</h1>
+                <p className="mt-2 text-sm text-text-secondary">{meta.total} products</p>
             </div>
 
-            {products.length === 0 ? (
-                <div className="py-20 text-center">
-                    <p className="text-text-secondary">No products found.</p>
-                </div>
-            ) : (
-                <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:grid-cols-4 lg:gap-x-8">
-                    {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-            )}
+            <ProductGrid products={products} />
+
+            <Pagination
+                currentPage={meta.page}
+                totalPages={meta.totalPages}
+                baseUrl="/products"
+            />
         </div>
     );
 }
