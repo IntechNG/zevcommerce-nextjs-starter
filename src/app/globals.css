@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-100: #e6f0ff;
+  --color-brand: #0f172a;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-border-light: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+
+  --font-sans: "Inter", "Geist", "Segoe UI", sans-serif;
+}
+
+/* Base resets */
+@layer base {
+
+  html,
+  body {
+    @apply antialiased bg-surface text-text-primary h-full w-full;
+  }
+}
