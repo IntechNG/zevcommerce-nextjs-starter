@@ -21,7 +21,7 @@ export function Header({ storeName }: HeaderProps) {
     return (
         <>
             <header className="sticky top-0 z-40 w-full border-b border-border-light bg-surface/95 backdrop-blur-md">
-                <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                <div className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1440px' }}>
 
                     {/* Left: Mobile menu + Logo */}
                     <div className="flex items-center gap-4">
@@ -87,7 +87,7 @@ export function Header({ storeName }: HeaderProps) {
                 {/* Search Bar (expandable) */}
                 {isSearchOpen && (
                     <div className="border-t border-border-light px-4 py-3 sm:px-6 lg:px-8">
-                        <div className="mx-auto max-w-7xl">
+                        <div className="mx-auto" style={{ maxWidth: '1440px' }}>
                             <form action={ROUTES.SEARCH} method="GET" className="relative">
                                 <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" />
                                 <input

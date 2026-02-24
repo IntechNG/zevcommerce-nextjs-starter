@@ -11,7 +11,7 @@ export function DemoBanner() {
 
     return (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5">
-            <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
+            <div className="mx-auto flex items-center justify-between gap-4" style={{ maxWidth: '1440px' }}>
                 <div className="flex items-center gap-2 text-sm text-amber-800">
                     <Zap size={14} className="shrink-0" />
                     <span>

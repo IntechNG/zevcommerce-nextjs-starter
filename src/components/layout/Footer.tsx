@@ -10,7 +10,7 @@ export default function Footer({ storeName = 'ATELIER' }: FooterProps) {
 
     return (
         <footer className="border-t border-border-light bg-surface">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 py-12 sm:px-6 lg:px-8" style={{ maxWidth: '1440px' }}>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
 
                     {/* Brand */}

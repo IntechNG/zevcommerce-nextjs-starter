@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { AccountPageHeader } from '@/components/account/AccountPageHeader';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/contexts/ToastContext';
@@ -45,11 +46,13 @@ export default function SecurityPage() {
     };
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-text-primary">Security</h2>
-            <p className="text-sm text-text-secondary">Change your password.</p>
+        <div className="w-full space-y-8">
+            <AccountPageHeader
+                title="Security"
+                description="Manage your password and account security settings."
+            />
 
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
+            <form onSubmit={handleSubmit} className="w-full space-y-4">
                 <Input
                     label="Current Password"
                     type="password"

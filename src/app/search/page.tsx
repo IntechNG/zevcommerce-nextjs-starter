@@ -24,7 +24,7 @@ export default async function SearchPage({
 
     if (!query) {
         return (
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" style={{ maxWidth: '1440px' }}>
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary mb-8">Search</h1>
                 <div className="max-w-xl mx-auto">
                     <form action={ROUTES.SEARCH} method="GET" className="relative">
@@ -66,7 +66,7 @@ export default async function SearchPage({
         results.articles.length;
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" style={{ maxWidth: '1440px' }}>
             <div className="mb-8">
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">
                     Search results

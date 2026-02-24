@@ -12,15 +12,26 @@
   --color-text-secondary: #64748b;
   --color-text-muted: #94a3b8;
   --color-accent: #18181b;
-
   --font-sans: "Inter", "Geist", "Segoe UI", sans-serif;
+}
+
+@layer utilities {
+  .max-w-1440 {
+    max-width: 1440px;
+  }
 }
 
 /* Base resets */
 @layer base {
+
   html,
   body {
-    @apply antialiased bg-surface text-text-primary h-full w-full;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    min-height: 100%;
+    width: 100%;
   }
 
   /* Smooth scrolling */
@@ -30,7 +41,8 @@
 
   /* Better focus styles */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand;
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
   }
 }
 
@@ -40,6 +52,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -50,6 +63,7 @@
   from {
     transform: translateX(-100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -59,6 +73,7 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -68,6 +83,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -94,33 +110,55 @@
 
 /* Prose styles for CMS content */
 .prose {
-  @apply text-text-primary leading-relaxed;
+  color: var(--color-text-primary);
+  line-height: 1.625;
 }
 
 .prose h2 {
-  @apply text-xl font-semibold mt-8 mb-4 text-text-primary;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
 }
 
 .prose h3 {
-  @apply text-lg font-semibold mt-6 mb-3 text-text-primary;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
 }
 
 .prose p {
-  @apply mb-4 text-text-secondary;
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
 }
 
 .prose ul {
-  @apply mb-4 pl-6 space-y-2;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
 }
 
 .prose li {
-  @apply text-text-secondary list-disc;
+  color: var(--color-text-secondary);
+  list-style-type: disc;
+  margin-bottom: 0.5rem;
 }
 
 .prose strong {
-  @apply font-semibold text-text-primary;
+  font-weight: 600;
+  color: var(--color-text-primary);
 }
 
 .prose a {
-  @apply text-brand underline underline-offset-2 hover:no-underline;
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  text-decoration: none;
 }

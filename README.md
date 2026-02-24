@@ -18,7 +18,7 @@ A production-ready ecommerce storefront built with **Next.js 16**, **Tailwind CS
 
 ```bash
 # Clone the repository
-git clone https://github.com/AfriqueTech/zevcommerce-nextjs-starter.git
+git clone https://github.com/IntechNG/zevcommerce-nextjs-starter.git
 cd zevcommerce-nextjs-starter
 
 # Install dependencies

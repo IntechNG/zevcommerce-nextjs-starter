@@ -10,7 +10,7 @@ const props = [
 export function ValueProps() {
     return (
         <section className="border-y border-border-light">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8" style={{ maxWidth: '1440px' }}>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     {props.map(({ icon: Icon, title, description }) => (
                         <div key={title} className="flex items-start gap-3">

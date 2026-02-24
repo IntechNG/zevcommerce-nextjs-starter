@@ -6,7 +6,7 @@ import { ROUTES } from '@/lib/constants';
 export function HeroSection() {
     return (
         <section className="relative bg-brand text-white">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36" style={{ maxWidth: '1440px' }}>
                 <div className="max-w-2xl">
                     <p className="text-xs font-medium tracking-[0.2em] uppercase text-white/60 mb-4">
                         New Season

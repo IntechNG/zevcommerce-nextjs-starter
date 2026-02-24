@@ -28,13 +28,17 @@ export default async function ProductDetailPage({ params }: Props) {
     const images = getAllMediaUrls(product.mediaJson);
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" style={{ maxWidth: '1440px' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
                 {/* Image Gallery */}
-                <ImageGallery images={images} />
+                <div className="lg:col-span-7">
+                    <ImageGallery images={images} />
+                </div>
 
                 {/* Product Info (client component for interactivity) */}
-                <ProductDetailClient product={product} />
+                <div className="lg:col-span-5">
+                    <ProductDetailClient product={product} />
+                </div>
             </div>
         </div>
     );

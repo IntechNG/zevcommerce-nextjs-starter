@@ -35,7 +35,7 @@ export default async function RootLayout({
     const storeName = process.env.NEXT_PUBLIC_STORE_NAME || config.name || "Store";
 
     return (
-        <html lang="en" className={inter.variable}>
+        <html lang="en" className={inter.variable} suppressHydrationWarning>
             <body className="font-sans min-h-screen flex flex-col bg-surface text-text-primary antialiased">
                 <Providers config={config}>
                     <DemoBanner />

@@ -44,7 +44,7 @@ export function ProfileForm({ customer }: { customer: AuthCustomer }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
+        <form onSubmit={handleSubmit} className="w-full space-y-4">
             <Input
                 label="Email"
                 value={customer.email}

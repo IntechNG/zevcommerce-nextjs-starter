@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { MapPin, Plus } from 'lucide-react';
+import { AccountPageHeader } from '@/components/account/AccountPageHeader';
 import { AddressCard } from '@/components/account/AddressCard';
 import { AddressForm, type AddressFormData } from '@/components/checkout/AddressForm';
 import { Modal } from '@/components/ui/Modal';
@@ -28,7 +29,7 @@ export default function AddressesPage() {
     useEffect(() => {
         getAddresses()
             .then(setAddresses)
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setIsLoading(false));
     }, []);
 
@@ -89,23 +90,24 @@ export default function AddressesPage() {
 
     if (isLoading) {
         return (
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-text-primary">Addresses</h2>
-                {Array.from({ length: 2 }).map((_, i) => (
-                    <Skeleton key={i} className="h-28 rounded-lg" />
-                ))}
+            <div className="w-full space-y-8">
+                <AccountPageHeader title="Addresses" />
+                <div className="w-full space-y-4">
+                    {Array.from({ length: 2 }).map((_, i) => (
+                        <Skeleton key={i} className="h-28 rounded-lg" />
+                    ))}
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="space-y-4">
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-text-primary">Addresses</h2>
+        <div className="w-full space-y-8">
+            <AccountPageHeader title="Addresses" description="Manage your shipping addresses for faster checkout.">
                 <Button variant="outline" size="sm" onClick={openNew}>
                     <Plus size={14} className="mr-1" /> Add Address
                 </Button>
-            </div>
+            </AccountPageHeader>
 
             {addresses.length === 0 ? (
                 <EmptyState
@@ -116,7 +118,7 @@ export default function AddressesPage() {
                     onAction={openNew}
                 />
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {addresses.map(addr => (
                         <AddressCard
                             key={addr.id}

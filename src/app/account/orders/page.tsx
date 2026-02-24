@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ShoppingBag } from 'lucide-react';
+import { AccountPageHeader } from '@/components/account/AccountPageHeader';
 import { OrderCard } from '@/components/account/OrderCard';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -16,25 +17,27 @@ export default function OrdersPage() {
     useEffect(() => {
         getOrders({ page: 1, limit: 20 })
             .then(result => setOrders(result.data))
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setIsLoading(false));
     }, []);
 
     if (isLoading) {
         return (
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-text-primary">Orders</h2>
-                {Array.from({ length: 3 }).map((_, i) => (
-                    <Skeleton key={i} className="h-20 rounded-lg" />
-                ))}
+            <div className="w-full space-y-8">
+                <AccountPageHeader title="Orders" />
+                <div className="w-full space-y-4">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                        <Skeleton key={i} className="h-20 rounded-lg" />
+                    ))}
+                </div>
             </div>
         );
     }
 
     if (orders.length === 0) {
         return (
-            <div>
-                <h2 className="text-xl font-semibold text-text-primary mb-4">Orders</h2>
+            <div className="w-full space-y-8">
+                <AccountPageHeader title="Orders" />
                 <EmptyState
                     icon={<ShoppingBag size={48} strokeWidth={1.5} />}
                     title="No orders yet"
@@ -47,9 +50,9 @@ export default function OrdersPage() {
     }
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-text-primary">Orders</h2>
-            <div className="space-y-3">
+        <div className="w-full space-y-8">
+            <AccountPageHeader title="Orders" />
+            <div className="w-full space-y-4">
                 {orders.map(order => (
                     <OrderCard key={order.id} order={order} />
                 ))}

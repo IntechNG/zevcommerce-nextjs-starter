@@ -9,7 +9,7 @@ export default function AccountOverviewPage() {
     const { customer } = useAuth();
 
     return (
-        <div className="space-y-8">
+        <div className="w-full space-y-8">
             <div>
                 <h2 className="text-xl font-semibold text-text-primary mb-1">
                     Welcome back, {customer?.firstName || 'there'}!

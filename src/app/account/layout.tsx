@@ -19,12 +19,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
     if (!isAuthenticated) return null;
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary mb-8">My Account</h1>
-            <div className="flex flex-col lg:flex-row gap-8">
+        <div className="mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-[68vh]" style={{ maxWidth: '1280px' }}>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary mb-8 text-center">My Account</h1>
+            <div className="grid grid-cols-1 lg:grid-cols-[14rem_minmax(0,1fr)] items-start gap-8 lg:gap-12">
                 <AccountSidebar />
-                <div className="flex-1 min-w-0">
-                    {children}
+                <div className="w-full min-w-0">
+                    <div className="w-full max-w-4xl">
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>

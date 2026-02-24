@@ -15,7 +15,7 @@ export default async function BlogPage() {
     const articles = await getArticles();
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" style={{ maxWidth: '1440px' }}>
             <div className="mb-8">
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">Journal</h1>
                 <p className="mt-2 text-sm text-text-secondary">Style tips, guides, and inspiration.</p>

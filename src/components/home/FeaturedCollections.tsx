@@ -13,7 +13,7 @@ export function FeaturedCollections({ collections }: FeaturedCollectionsProps) {
 
     return (
         <section className="bg-surface-muted">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20" style={{ maxWidth: '1440px' }}>
                 <div className="flex items-end justify-between mb-8">
                     <div>
                         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">
