@@ -1,0 +1,48 @@
+# ZevCommerce Next.js Starter — AI Context
+> This document is optimized for LLMs and AI Agents helping build or modify this storefront.
+
+## Tech Stack & Architecture
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4 (with standard CSS custom properties for theming)
+- **SDK**: `@zevop/commerce-storefront`
+- **Patterns**: Server Components for data fetching, Client Components for interactivity (Cart, Checkout, Auth).
+
+## Critical Project Map
+
+### 1. Data Access & API (`src/lib/api/`)
+Every data function follows a "Demo Fallback" pattern. AI agents should maintain this:
+```typescript
+export async function getSomething() {
+    if (isDemoMode()) return mockData; // from src/data/mock/
+    return zevClient.something.get(); // using src/lib/zev-client.ts
+}
+```
+
+### 2. Context Providers (`src/contexts/`)
+- `CartContext`: Manages cart state, line items, and drawer visibility.
+- `AuthContext`: Manages customer login state and access tokens.
+- `StoreContext`: Holds storefront configuration (logo, name, currency).
+- `ToastContext`: Universal notification system.
+
+### 3. Key Components
+- `Header.tsx`: Contains navigation and cart toggle.
+- `CartDrawer.tsx`: The main cart UI managed by `CartContext`.
+- `CheckoutSteps.tsx`: Multi-step logic for the checkout flow.
+- `ProductCard.tsx` / `ProductGrid.tsx`: Standardized product display.
+
+### 4. Layout & Theming
+- `src/app/globals.css`: Primary theme colors are defined in `@theme` block.
+- `src/app/layout.tsx`: Root layout with all providers and font configuration.
+- `src/app/account/layout.tsx`: Secondary layout for the customer dashboard.
+
+### 5. Environments
+- `NEXT_PUBLIC_DEMO_MODE`: Boolean. Controls if mock data or live SDK is used.
+- `NEXT_PUBLIC_ZEV_ENDPOINT`: The GraphQL API URL.
+- `NEXT_PUBLIC_ZEV_STOREFRONT_KEY`: The public API key.
+
+## AI Instructions
+- When adding new pages, use **Server Components** for fetching list data.
+- When adding forms or interactivity, use **Client Components** (`'use client'`).
+- Always use the `formatPrice` utility from `src/lib/utils.ts` for currency display.
+- Ensure all new API calls are added to `src/lib/api/` with mock fallbacks.
+- For layout changes, prefer **Tailwind classes** but use inline `style` for fixed sizing (like `1440px`) to bypass build caching if needed.
