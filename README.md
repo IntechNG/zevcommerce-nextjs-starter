@@ -73,6 +73,7 @@ src/
 │   ├── blog/               # Blog listing & article detail
 │   └── pages/              # CMS content pages
 ├── components/
+│   ├── analytics/          # LiveTracker (real-time visitor tracking)
 │   ├── layout/             # Header, Footer, MobileNav, DemoBanner
 │   ├── product/            # ProductCard, ImageGallery, VariantSelector, etc.
 │   ├── collection/         # CollectionCard, CollectionGrid
@@ -136,6 +137,28 @@ This starter uses all modules from `@zevop/commerce-storefront`:
 | Search | `search` | Search page |
 | Content | `getPages`, `getPage`, `getBlogs`, `getArticles` | CMS pages, blog |
 | Storefront | `getConfig`, `getShippingRates`, `getPaymentMethods` | Layout, checkout |
+| Analytics | `startPageTracking`, `stopHeartbeat`, `trackPageView` | All pages (via LiveTracker) |
+
+## Analytics (Live View)
+
+This starter includes built-in real-time analytics tracking powered by the SDK's `analytics` module. When connected to a live ZevCommerce backend, every page view is tracked and visible in the dashboard under **Analytics → Live View**.
+
+### How it works
+
+The `<LiveTracker />` component in `src/components/analytics/LiveTracker.tsx` is included in the root layout. It:
+
+1. Sends a page view event on every route change
+2. Sends a 30-second heartbeat to keep the session alive
+3. Automatically stops when the user leaves the page
+4. Does nothing in demo mode
+
+### No configuration needed
+
+Analytics tracking uses the same API key and endpoint you already configured for the storefront. The tracking endpoint lives on the same domain as the GraphQL API — no additional env variables required.
+
+### Disabling analytics
+
+Remove the `<LiveTracker />` component from `src/app/layout.tsx` to disable tracking entirely.
 
 ## Customization
 

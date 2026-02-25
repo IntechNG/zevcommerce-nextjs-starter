@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import { DemoBanner } from "@/components/layout/DemoBanner";
 import { ToastContainer } from "@/components/ui/Toast";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { LiveTracker } from "@/components/analytics/LiveTracker";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -38,6 +39,7 @@ export default async function RootLayout({
         <html lang="en" className={inter.variable} suppressHydrationWarning>
             <body className="font-sans min-h-screen flex flex-col bg-surface text-text-primary antialiased">
                 <Providers config={config}>
+                    <LiveTracker />
                     <DemoBanner />
                     <Header storeName={storeName} />
                     <main className="flex-1 flex flex-col">
